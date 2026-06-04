@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator PNGK & Merit</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f6f9; color: #333; padding: 20px; }
+        .card { max-width: 400px; background: #fff; margin: 20px auto; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        label { font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; background: #003366; color: #fff; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .res { margin-top: 20px; padding: 15px; background: #eef7ff; border-left: 5px solid #003366; display: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h3 style="text-align:center; margin-top:0; color:#003366;">Kalkulator PNGK & Merit</h3>
+    <div class="group"><label>PNGS Sem 1 (0.00 - 4.00):</label><input type="number" id="sem1" step="0.01" placeholder="3.75"></div>
+    <div class="group"><label>PNGS Sem 2 (0.00 - 4.00):</label><input type="number" id="sem2" step="0.01" placeholder="3.85"></div>
+    <div class="group"><label>Kokurikulum (0.00 - 10.00):</label><input type="number" id="koko" step="0.01" placeholder="8.50"></div>
+    <button onclick="kira()">Hitung Keputusan</button>
+    <div class="res" id="box">
+        <p><strong>PNGK (CGPA):</strong> <span id="outC" style="font-size:20px; font-weight:bold; color:#28a745;">0.00</span></p>
+        <p><strong>Merit UPU (90:10):</strong> <span id="outM" style="font-weight:bold; color:#003366;">0.00%</span></p>
+    </div>
+</div>
+<script>
+function kira() {
+    let sem1 = parseFloat(document.getElementById('sem1').value), sem2 = parseFloat(document.getElementById('sem2').value), koko = parseFloat(document.getElementById('koko').value);
+    if(isNaN(sem1)||isNaN(sem2)||isNaN(koko)||sem1<0||sem1>4||sem2<0||sem2>4||koko<0||koko>10) return alert("Sila masukkan nilai yang betul!");
+    
+    let cgpa = (sem1 + sem2) / 2, merit = (cgpa / 4 * 90) + (koko / 10 * 10);
+    document.getElementById('outC').innerText = cgpa.toFixed(2);
+    document.getElementById('outM').innerText = merit.toFixed(2) + " %";
+    document.getElementById('box').style.display = 'block';
+}
+</script>
+</body>
+</html>
